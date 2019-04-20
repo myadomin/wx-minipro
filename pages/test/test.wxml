@@ -1,72 +1,21 @@
 <!--pages/test/test.wxml-->
 <!-- <view>
-  <button bindtap="testGet">测试get请求</button>
   <txv-video vid="w086113y9ck" playerid="txv1"></txv-video> 
+  <button bindtap="testGet">测试get请求</button>
+  <button bindtap="testPost">测试post请求</button>
 </view> --> 
 <view class="wrap">
-  <!-- <button bindtap="testPost">测试post请求</button> -->
-  <view class='item'>
+  <view class='item' wx:for="{{articleList}}" wx:key="{{item.id}}" data-item="{{item.content_id}}" bindtap="tapArticle">
     <view class='left'>
-      <view class='title'>
-        美是我们一生的尊严不管任何时候，都是最好。
-      </view>
+      <view class='title'>{{item.title}}</view>
       <view class='extra'>
-        <text>新老对对对人</text>
-        <text>阅读3000</text>
-        <text>转发3000</text>
+        <text>{{item.author}}</text>
+        <text>阅读{{item.read_num}}</text>
+        <text>转发{{item.relay_num}}</text>
       </view>
     </view>
     <view class='right'>
-      <image class='image' mode="aspectFill"
-src='https://wx-images-1252024857.image.myqcloud.com/MzA3NjkyMDc2Mg==/jpgvqyrWQzRcR7zRyoib0yeXgIgKYHribrzbZCy1jLd3z1ibxbiaZ5uaibfk26RibdxLG9aATC8a7XcCJh7MehcTFNokPaA0.jpeg'></image>
-    </view>
-  </view>
-  <view class='item'>
-    <view class='left'>
-      <view class='title'>
-        美是我们一生的尊严不管任何时候，都是最好。
-      </view>
-      <view class='extra'>
-        <text>新老人</text>
-        <text>阅读3000</text>
-        <text>转发3000</text>
-      </view>
-    </view>
-    <view class='right'>
-      <image class='image' mode="aspectFill"
-src='https://wx-images-1252024857.image.myqcloud.com/MzA3NjkyMDc2Mg==/jpgHLJ9Tkicl9xcySe52M6KQ0Q4icZEsQ1SFN9bkpicTApGjGy6fIF53pqLuEJKG5RJKpdgiag3N9naRuF84PB7Iw42Mw0.jpeg'></image>
-    </view>
-  </view>
-  <view class='item'>
-    <view class='left'>
-      <view class='title'>
-        美是我们一生的尊严不管任何时候，都是最好。
-      </view>
-      <view class='extra'>
-        <text>新老人</text>
-        <text>阅读3000</text>
-        <text>转发3000</text>
-      </view>
-    </view>
-    <view class='right'>
-      <image class='image' mode="aspectFill"
-src='https://wx-images-1252024857.image.myqcloud.com/MzA3NjkyMDc2Mg==/jpgvqyrWQzRcR7zRyoib0yeXgIgKYHribrzbZCy1jLd3z1ibxbiaZ5uaibfk26RibdxLG9aATC8a7XcCJh7MehcTFNokPaA0.jpeg'></image>
-    </view>
-  </view>
-  <view class='item'>
-    <view class='left'>
-      <view class='title'>
-        美是我们一生的尊严和责任，不管任何时候，都是最好的年纪。
-      </view>
-      <view class='extra'>
-        <text>新老多点人</text>
-        <text>阅读3000</text>
-        <text>转发3000</text>
-      </view>
-    </view>
-    <view class='right'>
-      <image class='image' mode="aspectFill"
-src='https://wx-images-1252024857.image.myqcloud.com/MzA3NjkyMDc2Mg==/jpgvqyrWQzRcR7zRyoib0yeXgIgKYHribrzbZCy1jLd3z1ibxbiaZ5uaibfk26RibdxLG9aATC8a7XcCJh7MehcTFNokPaA0.jpeg'></image>
+      <image class='image' mode="aspectFill" src="{{item.cover}}"></image>
     </view>
   </view>
 </view>

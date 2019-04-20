@@ -8,78 +8,80 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    articleList: [],
+    param: {
+      current: 1,
+      pageSize: 10
+    },
+    isLoading: false
   },
 
-  testPost () {
-    const data = {
-      current: 3,
-      pageSize: 5
-    }
-    ajax.post(urls.getArticleList, data).then(res => {
-      console.log(res)
+  // 获取文章列表
+  getArticleList () {
+    this.enterLoadingState()
+    ajax.post(urls.getArticleList, this.data.param).then(res => {
+      const list = res.data.list
+      if (!list.length) return
+      let { articleList, param } = this.data
+      if (param.current === 1) {
+        articleList = []
+      }
+      if (list.length > 0) {
+        param.current++;
+      }
+      this.setData({ 
+        articleList: articleList.concat(list),
+        param: param
+      })
+      // console.log(param, list, articleList.concat(list))
+      this.quitLoadingState();
     })
   },
 
-  testGet() {
-    ajax.get(urls.getArticleContentById(225)).then(res => {
-      console.log(res)
+  // 进入加载状态
+  enterLoadingState () {
+    this.setData({
+      isLoading: true
     })
+  },
+  
+  // 离开加载状态
+  quitLoadingState () {
+    this.setData({
+      isLoading: false
+    })
+    // 停止下拉动作
+    wx.stopPullDownRefresh();
+  },
+
+  // 点击文章
+  tapArticle (e) {
+    let { item } = e.currentTarget.dataset;
+    wx.navigateTo({ url: '../articleContent/articleContent?id=' + item });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  onLoad (options) {
+    this.getArticleList()
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
+  onPullDownRefresh () {
+    this.setData({ param: { ...this.data.param, current: 1 } })
+    this.getArticleList()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onReachBottom () {
+    let { isLoading } = this.data;
+    if (!isLoading) {
+      this.getArticleList();
+    }
   }
 })

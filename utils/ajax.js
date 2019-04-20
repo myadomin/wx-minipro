@@ -9,18 +9,7 @@ const request = (url, method, data) => {
       },
       success (res) {
         if (res.statusCode === 200) {
-          if (res.data.ret === 1) {
-            resolve(res.data)
-          } else {
-            resolve(res.data)
-            // 数据库处理失败等情况 返回ret 0
-            // const err = `处理失败：ret ${res.data.ret}`
-            // wx.showToast({
-            //   title: err,
-            //   icon: 'none'
-            // })
-            // reject(err)
-          }
+          resolve(res.data)
         } else {
           // 400 500等非200的情况
           const err = `接口错误：statusCode ${res.statusCode}`
