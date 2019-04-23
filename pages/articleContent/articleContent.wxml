@@ -1,6 +1,11 @@
 <import src="../../libs/wxParse/wxParse.wxml"/>
 
 <view>
-  <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
-  <!-- <rich-text nodes="{{content}}"></rich-text> -->
+  <view>
+    <text>repTime: {{endRep - startRep}}--</text>
+    <text>parseTime: {{endParse - endRep}}</text>
+  </view>
+  <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}"/> -->
+  <txv-video wx:if="{{vid}}" vid="{{vid}}" playerid="{{vid}}"></txv-video> 
+  <rich-text nodes="{{nodes}}"></rich-text>
 </view>

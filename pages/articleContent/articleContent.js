@@ -9,16 +9,48 @@ Page({
    * 页面的初始数据
    */
   data: {
-    content: ''
+    startRep: '',
+    endRep: '',
+    endParse: '',
+    nodes: '',
+    vid: ''
+  },
+
+  // 解析html
+  parseContent (html) {
+    const aa = html.replace(/section/g, 'div')
+    .replace(/<(img|table) ([\s\S]*?)(\/>|>)/g, '<$1 $2 style="width: 100%!important" />')
+    .replace(/<wxs ([\s\S]*?) <\/wxs>/g, '')
+      // .split(/<iframe allowfullscreen[\s\S]*?<\/iframe>/g)
+    // console.log(aa)
+    return aa
+  },
+
+  // 获取vid
+  getQueryString (url, query) {
+    const reg = new RegExp('(^|&)' + query + '=([^&]*)(&|$)', 'i');
+    const r = url.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2]);
+    }
+    return null;
   },
 
   // 获取文章详情
   getArticleContentById (id) {
+    this.setData({ startRep: new Date().getTime() })
+    wx.showLoading({
+      title: '加载中'
+    })
     ajax.get(urls.getArticleContentById(id)).then(res => {
-      console.log(res)
-      const content = res.data.content.content
-      WxParse.wxParse('article', 'html', content, this, 0);
-      this.setData({ content: res.data.content.content })
+      this.setData({ endRep: new Date().getTime() })
+      // const content = res.data.content.content
+      // WxParse.wxParse('article', 'html', content, this, 0);
+      const content = this.parseContent(res.data.content.content)
+      this.setData({ nodes: content })
+      this.setData({ vid: this.getQueryString(res.data.content.video_url, 'vid') })
+      this.setData({ endParse: new Date().getTime() })
+      wx.hideLoading()
     })
   },
 
@@ -26,7 +58,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.id)
     this.getArticleContentById(options.id)
   },
 
@@ -41,7 +72,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

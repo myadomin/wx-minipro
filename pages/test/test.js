@@ -11,7 +11,9 @@ Page({
     articleList: [],
     param: {
       current: 1,
-      pageSize: 10
+      pageSize: 10,
+      order: 'DESC',
+      orderBy: "datetime"
     },
     isLoading: false
   },

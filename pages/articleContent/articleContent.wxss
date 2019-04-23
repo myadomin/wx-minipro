@@ -1,1 +1,6 @@
-@import "../../libs/wxParse/wxParse.wxss";
+/* @import "../../libs/wxParse/wxParse.wxss"; */
+@import "./weixin.wxss";
+
+.rich_media_tool {
+  display: none;
+}
