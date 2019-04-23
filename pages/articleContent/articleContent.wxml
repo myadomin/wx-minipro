@@ -1,4 +1,4 @@
-<import src="../../libs/wxParse/wxParse.wxml"/>
+<!-- <import src="../../libs/wxParse/wxParse.wxml"/> -->
 
 <view>
   <view>

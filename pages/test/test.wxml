@@ -1,9 +1,3 @@
-<!--pages/test/test.wxml-->
-<!-- <view>
-  <txv-video vid="w086113y9ck" playerid="txv1"></txv-video> 
-  <button bindtap="testGet">测试get请求</button>
-  <button bindtap="testPost">测试post请求</button>
-</view> --> 
 <view class="wrap">
   <view class='item' wx:for="{{articleList}}" wx:key="{{item.id}}" data-item="{{item.content_id}}" bindtap="tapArticle">
     <view class='left'>
