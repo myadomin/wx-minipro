@@ -1,6 +1,27 @@
-/* @import "../../libs/wxParse/wxParse.wxss"; */
 @import "./weixin.wxss";
 
-.rich_media_tool {
+/* weixin.css覆盖 */
+/* 去掉read more, title, 作者 */
+.rich_media_tool, .rich_media_title, .rich_media_meta_list {
   display: none;
+}
+/* 去掉原来的padding和底色 */
+.rich_media_area_primary {
+    padding: 0rpx;
+    background-color: #fff
+}
+
+/* 样式 */
+.wrap {
+  padding: 0 20rpx;
+}
+.item {
+  margin-bottom: 20rpx; 
+}
+.title {
+  font-size: 40rpx;
+}
+.author {
+  font-size: 24rpx;
+  color: #aaa;
 }
