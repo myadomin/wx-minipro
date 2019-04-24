@@ -22,6 +22,6 @@
   font-size: 40rpx;
 }
 .author {
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #aaa;
 }
