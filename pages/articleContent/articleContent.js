@@ -11,7 +11,7 @@ Page({
     title: '',
     author: '',
     html: '',
-    vid: ''
+    vidArr: ''
   },
 
   // 处理html字符串
@@ -29,18 +29,32 @@ Page({
     return r ? unescape(r[2]) : null;
   },
 
+  // 获取vie组成的数组
+  getVidArr (video_urls) {
+    if (video_urls) {
+      let resArr = []
+      const arr = video_urls.split(',')
+      arr.forEach(url => {
+        resArr.push(this.getQueryString(url, 'vid'))
+      })
+      return resArr
+    } else {
+      return []
+    }
+  },
+
   // 获取文章详情
   getArticleContentById (id) {
     this.setData({ startRep: new Date().getTime() })
     wx.showLoading({ title: '加载中' })
     ajax.get(urls.getArticleContentById(id)).then(res => {
       this.setData({ endRep: new Date().getTime() })
-      const { title, author, content, video_url } = res.data.content
+      const { title, author, content, video_urls } = res.data.content
       this.setData({
         title,
         author,
         html: this.parseHtml(content),
-        vid: this.getQueryString(video_url, 'vid'),
+        vidArr: this.getVidArr(video_urls),
         endParse: new Date().getTime()
       })
       wx.hideLoading()

@@ -12,4 +12,4 @@
       <image class='image' mode="aspectFill" src="{{item.cover}}"></image>
     </view>
   </view>
-</view>
+</view> 

@@ -4,7 +4,9 @@
     <text>parseTime: {{endParse - endRep}}</text>
   </view>
   <view class='title item'>{{title}}</view>
-  <view class='author item'>{{author}}</view>
-  <txv-video class='vid item' wx:if="{{vid}}" vid="{{vid}}" playerid="{{vid}}"></txv-video> 
+  <!-- <view class='author item'>{{author}}</view> -->
+  <block wx:for="{{vidArr}}" wx:key="{{index}}">
+    <txv-video class='vid item' vid="{{item}}" playerid="{{item}}"></txv-video> 
+  </block>
   <rich-text class='html item' nodes="{{html}}"></rich-text>
 </view>

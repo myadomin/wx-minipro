@@ -13,7 +13,8 @@ Page({
       current: 1,
       pageSize: 10,
       order: 'DESC',
-      orderBy: "datetime"
+      // filterTitle: '老同学',
+      orderBy: "id"
     },
     isLoading: false
   },

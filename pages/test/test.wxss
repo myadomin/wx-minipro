@@ -7,7 +7,6 @@
 }
 .title {
   font-size: 36rpx;
-  /* font-size: 18px; */
   overflow:hidden; 
   text-overflow:ellipsis;
   display:-webkit-box; 
