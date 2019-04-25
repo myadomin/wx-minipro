@@ -60,7 +60,7 @@ Page({
   // 点击文章
   tapArticle (e) {
     let { item } = e.currentTarget.dataset;
-    wx.navigateTo({ url: '../articleContent/articleContent?id=' + item });
+    wx.navigateTo({ url: '../content/content?id=' + item });
   },
 
   /**

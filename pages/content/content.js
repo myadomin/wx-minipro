@@ -35,7 +35,10 @@ Page({
       let resArr = []
       const arr = video_urls.split(',')
       arr.forEach(url => {
-        resArr.push(this.getQueryString(url, 'vid'))
+        // 只显示 https://v.qq.com 的视频
+        if (url.indexOf('v.qq.com') !== -1) {
+          resArr.push(this.getQueryString(url, 'vid'))
+        }
       })
       return resArr
     } else {
