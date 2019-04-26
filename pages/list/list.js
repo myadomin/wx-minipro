@@ -11,7 +11,7 @@ Page({
     articleList: [],
     param: {
       current: 1,
-      pageSize: 10,
+      pageSize: 20,
       order: 'DESC',
       // filterTitle: '老同学',
       orderBy: "id"
@@ -43,16 +43,14 @@ Page({
 
   // 进入加载状态
   enterLoadingState () {
-    this.setData({
-      isLoading: true
-    })
+    this.setData({ isLoading: true })
+    // wx.showLoading({ title: '加载中' })
   },
   
   // 离开加载状态
   quitLoadingState () {
-    this.setData({
-      isLoading: false
-    })
+    this.setData({ isLoading: false })
+    // wx.hideLoading()
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
@@ -71,7 +69,7 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * 页面相关事件处理函数--监听用户下拉动作 enablePullDownRefresh false 暂时不开启
    */
   onPullDownRefresh () {
     this.setData({ param: { ...this.data.param, current: 1 } })

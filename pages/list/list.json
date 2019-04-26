@@ -2,6 +2,6 @@
   "usingComponents": {
     "txv-video": "plugin://tencentvideo/video"
   },
-  "onReachBottomDistance": 0,
-  "enablePullDownRefresh": true
+  "onReachBottomDistance": 300,
+  "enablePullDownRefresh": false
 }
