@@ -14,7 +14,8 @@ Page({
       pageSize: 20,
       order: 'DESC',
       // filterTitle: '老同学',
-      orderBy: "id"
+      orderBy: "id",
+      openId: wx.getStorageSync('openid')
     },
     isLoading: false
   },
@@ -23,7 +24,7 @@ Page({
   getArticleList () {
     this.enterLoadingState()
     ajax.post(urls.getArticleList, this.data.param).then(res => {
-      const list = res.data.list
+      const { list, openId, readContentIds } = res.data
       if (!list.length) return
       let { articleList, param } = this.data
       if (param.current === 1) {
@@ -37,6 +38,7 @@ Page({
         param: param
       })
       // console.log(param, list, articleList.concat(list))
+      console.log(openId, readContentIds)
       this.quitLoadingState();
     })
   },

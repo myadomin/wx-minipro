@@ -50,7 +50,11 @@ Page({
   getArticleContentById (id) {
     this.setData({ startRep: new Date().getTime() })
     wx.showLoading({ title: '加载中' })
-    ajax.get(urls.getArticleContentById(id)).then(res => {
+    const data = {
+      id,
+      openId: wx.getStorageSync('openid')
+    }
+    ajax.post(urls.getArticleContentById, data).then(res => {
       this.setData({ endRep: new Date().getTime() })
       const { title, author, content, video_urls } = res.data.content
       this.setData({
