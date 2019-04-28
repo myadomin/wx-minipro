@@ -15,6 +15,7 @@ Page({
       order: 'DESC',
       // filterTitle: '老同学',
       orderBy: "id",
+      // TODO wxServer.checkSession是异步操作 应该等他完成了才进入list页面 而不是直接进入list页面
       openId: wx.getStorageSync('openid')
     },
     isLoading: false
