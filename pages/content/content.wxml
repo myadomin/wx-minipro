@@ -9,4 +9,5 @@
     <txv-video class='vid item' vid="{{item}}" playerid="{{item}}"></txv-video> 
   </block>
   <rich-text class='html item' nodes="{{html}}"></rich-text>
+  <button class='shareBtn' type="primary" open-type="share">转发</button>
 </view>

@@ -1,4 +1,3 @@
-const wxServer = require('./utils/wxServer.js')
 
 App({
   onLaunch: function () {
@@ -6,9 +5,6 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-    // 登录
-    wxServer.checkSession()
 
     // 获取用户信息
     wx.getSetting({

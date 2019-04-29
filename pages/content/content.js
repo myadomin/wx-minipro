@@ -5,6 +5,7 @@ const WxParse = require('../../libs/wxParse/wxParse.js');
 Page({
 
   data: {
+    contentId: '',
     startRep: '',
     endRep: '',
     endParse: '',
@@ -47,11 +48,11 @@ Page({
   },
 
   // 获取文章详情
-  getArticleContentById (id) {
+  getArticleContentById () {
     this.setData({ startRep: new Date().getTime() })
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中...' })
     const data = {
-      id,
+      id: this.data.contentId,
       openId: wx.getStorageSync('openid')
     }
     ajax.post(urls.getArticleContentById, data).then(res => {
@@ -72,7 +73,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getArticleContentById(options.id)
+    this.setData({ contentId: options.id })
+    this.getArticleContentById()
+  },
+
+  /**
+   * 用户点击右上角或者转发按钮 无论是否点击确定转发都会进到这里
+   */
+  onShareAppMessage: function (res) {
+    console.log(res)
+    ajax.post(urls.incRelayNum, { id: this.data.contentId })
   },
 
   /**
@@ -113,13 +123,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

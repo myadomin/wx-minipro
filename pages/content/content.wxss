@@ -14,6 +14,7 @@
 /* 样式 */
 .wrap {
   padding: 0 20rpx;
+  position: relative;
 }
 .item {
   display: block;
@@ -25,4 +26,11 @@
 .author {
   font-size: 26rpx;
   color: #aaa;
+}
+.shareBtn {
+  border-radius:0px;
+  width:100%;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
 }

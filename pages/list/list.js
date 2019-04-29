@@ -1,5 +1,6 @@
 // pages/test/test.js
 const ajax = require('../../utils/ajax.js')
+const wxi = require('../../utils/wxi.js')
 const urls = require('../../config/urls.js')
 
 Page({
@@ -14,9 +15,7 @@ Page({
       pageSize: 20,
       order: 'DESC',
       // filterTitle: '老同学',
-      orderBy: "id",
-      // TODO wxServer.checkSession是异步操作 应该等他完成了才进入list页面 而不是直接进入list页面
-      openId: wx.getStorageSync('openid')
+      orderBy: "id"
     },
     isLoading: false
   },
@@ -24,7 +23,8 @@ Page({
   // 获取文章列表
   getArticleList () {
     this.enterLoadingState()
-    ajax.post(urls.getArticleList, this.data.param).then(res => {
+    const data = { ...this.data.param, openId: wx.getStorageSync('openid') }
+    return ajax.post(urls.getArticleList, data).then(res => {
       const { list, openId, readContentIds } = res.data
       if (!list.length) return
       let { articleList, param } = this.data
@@ -47,13 +47,11 @@ Page({
   // 进入加载状态
   enterLoadingState () {
     this.setData({ isLoading: true })
-    // wx.showLoading({ title: '加载中' })
   },
   
   // 离开加载状态
   quitLoadingState () {
     this.setData({ isLoading: false })
-    // wx.hideLoading()
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
@@ -68,7 +66,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    this.getArticleList()
+    wx.showLoading({ title: '加载中...' })
+    wxi.checkSession().then(() => {
+      this.getArticleList().then(() => {
+        wx.hideLoading()
+      })
+    })
   },
 
   /**

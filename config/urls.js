@@ -5,5 +5,6 @@ const ctx = 'http://127.0.0.1:7001'
 module.exports = {
   getArticleList: `${ctx}/wx/article/list`,
   getArticleContentById: `${ctx}/wx/article/content`,
-  getOpenIdByCode: `${ctx}/wx/user/login`
+  getOpenIdByCode: `${ctx}/wx/user/login`,
+  incRelayNum: `${ctx}/wx/article/incRelayNum`
 }
