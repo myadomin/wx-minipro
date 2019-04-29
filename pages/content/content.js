@@ -81,7 +81,7 @@ Page({
    * 用户点击右上角或者转发按钮 无论是否点击确定转发都会进到这里
    */
   onShareAppMessage: function (res) {
-    console.log(res)
+    // 转发量加一
     ajax.post(urls.incRelayNum, { id: this.data.contentId })
   },
 

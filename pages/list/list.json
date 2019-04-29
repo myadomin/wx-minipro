@@ -3,5 +3,5 @@
     "txv-video": "plugin://tencentvideo/video"
   },
   "onReachBottomDistance": 300,
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": true
 }

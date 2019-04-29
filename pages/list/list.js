@@ -11,32 +11,28 @@ Page({
   data: {
     articleList: [],
     param: {
-      current: 1,
-      pageSize: 20,
-      order: 'DESC',
-      // filterTitle: '老同学',
-      orderBy: "id"
+      pageSize: 10,
+      // filterTitle: '老同学'
     },
     isLoading: false
   },
 
   // 获取文章列表
-  getArticleList () {
+  getArticleList (isAppendBottom) {
     this.enterLoadingState()
     const data = { ...this.data.param, openId: wx.getStorageSync('openid') }
     return ajax.post(urls.getArticleList, data).then(res => {
       const { list, openId, readContentIds } = res.data
-      if (!list.length) return
+      if (!list.length) {
+        wx.showToast({
+          title: '返回的是空数组'
+        })
+        return
+      }
       let { articleList, param } = this.data
-      if (param.current === 1) {
-        articleList = []
-      }
-      if (list.length > 0) {
-        param.current++;
-      }
       this.setData({ 
-        articleList: articleList.concat(list),
-        param: param
+        // 下拉list往下加 上拉list往上加
+        articleList: isAppendBottom ? articleList.concat(list) : list.concat(articleList)
       })
       // console.log(param, list, articleList.concat(list))
       console.log(openId, readContentIds)
@@ -78,8 +74,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作 enablePullDownRefresh false 暂时不开启
    */
   onPullDownRefresh () {
-    this.setData({ param: { ...this.data.param, current: 1 } })
-    this.getArticleList()
+    let { isLoading } = this.data;
+    if (!isLoading) {
+      this.getArticleList(false)
+    }
   },
 
   /**
@@ -88,7 +86,7 @@ Page({
   onReachBottom () {
     let { isLoading } = this.data;
     if (!isLoading) {
-      this.getArticleList();
+      this.getArticleList(true)
     }
   }
 })
