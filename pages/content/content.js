@@ -31,10 +31,10 @@ Page({
   },
 
   // 获取vie组成的数组
-  getVidArr (video_urls) {
-    if (video_urls) {
+  getVidArr (videoUrls) {
+    if (videoUrls) {
       let resArr = []
-      const arr = video_urls.split(',')
+      const arr = videoUrls.split(',')
       arr.forEach(url => {
         // 只显示 https://v.qq.com 的视频
         if (url.indexOf('v.qq.com') !== -1) {
@@ -53,16 +53,16 @@ Page({
     wx.showLoading({ title: '加载中...' })
     const data = {
       id: this.data.contentId,
-      openId: wx.getStorageSync('openid')
+      openId: wx.getStorageSync('openId')
     }
     ajax.post(urls.getArticleContentById, data).then(res => {
       this.setData({ endRep: new Date().getTime() })
-      const { title, author, content, video_urls } = res.data.content
+      const { title, author, content, videoUrls } = res.data.content
       this.setData({
         title,
         author,
         html: this.parseHtml(content),
-        vidArr: this.getVidArr(video_urls),
+        vidArr: this.getVidArr(videoUrls),
         endParse: new Date().getTime()
       })
       wx.hideLoading()

@@ -11,8 +11,7 @@ Page({
   data: {
     articleList: [],
     param: {
-      pageSize: 10,
-      // filterTitle: '老同学'
+      pageSize: 10
     },
     isLoading: false
   },
@@ -20,7 +19,7 @@ Page({
   // 获取文章列表
   getArticleList (isAppendBottom) {
     this.enterLoadingState()
-    const data = { ...this.data.param, openId: wx.getStorageSync('openid') }
+    const data = { ...this.data.param, openId: wx.getStorageSync('openId') }
     return ajax.post(urls.getArticleList, data).then(res => {
       const { list, openId, readContentIds } = res.data
       if (!list.length) {

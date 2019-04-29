@@ -1,11 +1,11 @@
 <view class="wrap">
-  <view class='item' wx:for="{{articleList}}" wx:key="{{item.id}}" data-item="{{item.content_id}}" bindtap="tapArticle">
+  <view class='item' wx:for="{{articleList}}" wx:key="{{item.id}}" data-item="{{item.contentId}}" bindtap="tapArticle">
     <view class='left'>
-      <view class='title'>{{item.content_id}}{{item.title}}</view>
+      <view class='title'>{{item.contentId}}{{item.title}}</view>
       <view class='extra'>
         <!-- <text>{{item.author}}</text> -->
-        <text>阅读{{item.read_num}}</text>
-        <text>转发{{item.relay_num}}</text>
+        <text>阅读{{item.readNum}}</text>
+        <text>转发{{item.relayNum}}</text>
       </view>
     </view>
     <view class='right'>
