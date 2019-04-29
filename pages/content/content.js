@@ -25,15 +25,16 @@ Page({
 
   // 获取vid
   getQueryString (url, query) {
+    const search = url.split('?')[1]
     const reg = new RegExp('(^|&)' + query + '=([^&]*)(&|$)', 'i');
-    const r = url.substr(1).match(reg);
+    const r = search.match(reg);
     return r ? unescape(r[2]) : null;
   },
 
   // 获取vie组成的数组
   getVidArr (videoUrls) {
+    let resArr = []
     if (videoUrls) {
-      let resArr = []
       const arr = videoUrls.split(',')
       arr.forEach(url => {
         // 只显示 https://v.qq.com 的视频
@@ -41,10 +42,8 @@ Page({
           resArr.push(this.getQueryString(url, 'vid'))
         }
       })
-      return resArr
-    } else {
-      return []
     }
+    return resArr
   },
 
   // 获取文章详情
