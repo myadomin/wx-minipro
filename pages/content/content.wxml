@@ -1,13 +1,13 @@
 <view class='wrap'>
-  <view>
+  <!-- <view>
     <text>repTime: {{endRep - startRep}}--</text>
     <text>parseTime: {{endParse - endRep}}</text>
-  </view>
+  </view> -->
   <view class='title item'>{{title}}</view>
   <!-- <view class='author item'>{{author}}</view> -->
   <block wx:for="{{vidArr}}" wx:key="{{index}}">
     <txv-video class='vid item' vid="{{item}}" playerid="{{item}}"></txv-video> 
   </block>
   <rich-text class='html item' nodes="{{html}}"></rich-text>
-  <button class='shareBtn' type="primary" open-type="share">转发</button>
+  <button class='shareBtn' type="primary" open-type="share">分享给好友</button>
 </view>

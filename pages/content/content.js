@@ -68,19 +68,14 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  // 获取数据
   onLoad: function (options) {
     this.setData({ contentId: options.id })
     this.getArticleContentById()
   },
 
-  /**
-   * 用户点击右上角或者转发按钮 无论是否点击确定转发都会进到这里
-   */
+  // 用户点击右上角或者转发按钮 无论是否点击确定转发都会进到这里 转发量加一
   onShareAppMessage: function (res) {
-    // 转发量加一
     ajax.post(urls.incRelayNum, { id: this.data.contentId })
   },
 

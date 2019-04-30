@@ -2,13 +2,14 @@
   "pages": [
     "pages/list/list",
     "pages/index/index",
-    "pages/content/content",
-    "pages/logs/logs"
+    "pages/content/content"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#f8f8f8",
-    "navigationBarTitleText": "WeChat",
+    "backgroundColor": "#f0f0f0",
+    "backgroundColorTop": "#f0f0f0",
+    "backgroundColorBottom": "#f0f0f0",
+    "navigationBarBackgroundColor": "#f0f0f0",
+    "navigationBarTitleText": "兰文集",
     "navigationBarTextStyle": "black"
   },
   "plugins": {

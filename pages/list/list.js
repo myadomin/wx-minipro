@@ -4,15 +4,11 @@ const wxi = require('../../utils/wxi.js')
 const urls = require('../../config/urls.js')
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     articleList: [],
     param: {
-      pageSize: 10,
-      // filterTitle: '笑着想哭'
+      pageSize: 20,
+      // filterTitle: '老同学'
     },
     isLoading: false
   },
@@ -25,17 +21,15 @@ Page({
       const { list, openId, readContentIds } = res.data
       if (!list.length) {
         wx.showToast({
-          title: '返回的是空数组'
+          title: '暂无数据'
         })
-        return
       }
-      let { articleList, param } = this.data
+      let { articleList } = this.data
       this.setData({ 
-        // 下拉list往下加 上拉list往上加
-        articleList: isAppendBottom ? articleList.concat(list) : list.concat(articleList)
+        // 下拉list往下加 上拉刷新为list
+        articleList: isAppendBottom ? articleList.concat(list) : list
       })
-      // console.log(param, list, articleList.concat(list))
-      console.log(openId, readContentIds)
+      // console.log(openId, readContentIds)
       this.quitLoadingState();
     })
   },
@@ -49,7 +43,7 @@ Page({
   quitLoadingState () {
     this.setData({ isLoading: false })
     // 停止下拉动作
-    wx.stopPullDownRefresh();
+    wx.stopPullDownRefresh()
   },
 
   // 点击文章
@@ -58,9 +52,7 @@ Page({
     wx.navigateTo({ url: '../content/content?id=' + item });
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  // 登录获取openid存入storage
   onLoad (options) {
     wx.showLoading({ title: '加载中...' })
     wxi.checkSession().then(() => {
@@ -70,9 +62,7 @@ Page({
     })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作 enablePullDownRefresh false 暂时不开启
-   */
+  // 监听用户下拉动作
   onPullDownRefresh () {
     let { isLoading } = this.data;
     if (!isLoading) {
@@ -80,9 +70,7 @@ Page({
     }
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  // 监听用户上拉触底事件
   onReachBottom () {
     let { isLoading } = this.data;
     if (!isLoading) {

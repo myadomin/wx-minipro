@@ -39,7 +39,7 @@ const doLogin = (resolve, reject) => {
             title: '登录错误'
           })
         }
-        // 就算登录错误也进入列表页，登录错误只是无法redis记录已读文章
+        // 就算登录错误也进入列表页，登录错误只是无法setStorageSync openId
         resolve()
       })
     }

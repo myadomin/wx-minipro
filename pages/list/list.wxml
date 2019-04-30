@@ -1,7 +1,8 @@
 <view class="wrap">
   <view class='item' wx:for="{{articleList}}" wx:key="{{item.id}}" data-item="{{item.contentId}}" bindtap="tapArticle">
     <view class='left'>
-      <view class='title'>{{item.contentId}}{{item.title}}</view>
+      <!-- <view class='title'>{{item.id}}{{item.contentId}}{{item.title}}</view> -->
+      <view class='title'>{{item.title}}</view>
       <view class='extra'>
         <!-- <text>{{item.author}}</text> -->
         <text>阅读{{item.readNum}}</text>
